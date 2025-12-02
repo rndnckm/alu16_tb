@@ -1,3 +1,7 @@
+
+//package alu_tb_pkg;
+ `include "uvm_macros.svh"
+ import uvm_pkg::*;
 /*typedef enum logic [4:0] { //  mode, sel, Active Low Inputs
 	
 	OP_A_ADD      = {1'b0, 4'b1001},  // A plus B (Add)
@@ -23,3 +27,5 @@ typedef enum logic [4:0] { //  mode, sel, Active High Inputs
 	OP_L_XOR      = {1'b1, 4'b0110}  // XOR
 	
 } alu_opcode_t;
+
+//endpackage

@@ -1,13 +1,14 @@
 class alu_driver extends uvm_driver #(alu_seq_item);
 `uvm_component_utils(alu_driver)
+
   virtual alu_if vif;
 
-  function new(string name, uvm_component parent);
+  function new(string name, uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
   function void build_phase(uvm_phase phase);
-    if (!uvm_config_db#(virtual alu_if)::get(this,"","alu_vif",vif))
+    if (!uvm_config_db#(virtual alu_if.tb_mp)::get(this,"","vif",vif))
       `uvm_fatal("NOVIF","Virtual interface not found");
   endfunction
 

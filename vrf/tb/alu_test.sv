@@ -1,5 +1,5 @@
-class alu_basic_test extends uvm_test;
-  `uvm_component_utils(alu_basic_test)
+class alu_base_test extends uvm_test;
+  `uvm_component_utils(alu_base_test)
   alu_env env;
 
 	function new(string name = "base_test", uvm_component parent = null);
@@ -12,12 +12,15 @@ class alu_basic_test extends uvm_test;
 	endfunction
 	
   task run_phase(uvm_phase phase);
+	alu_base_seq base_seq;
+	`uvm_info("TEST", "Basic testbench structure is running", UVM_LOW)
     phase.raise_objection(this);
-   // alu_add_seq seq = alu_add_seq::type_id::create("seq");
-    //seq.start(env.agent.sequencer);
-	            `uvm_info("TEST", "Basic testbench structure is running", UVM_LOW)
-            #100;
+	
+	base_seq = alu_base_seq::type_id::create("seq");
+    base_seq.start(env.agent.seqr);
+	
     phase.drop_objection(this);
+	`uvm_info("TEST", "Basic testbench structure completed", UVM_LOW)
   endtask
   
 endclass

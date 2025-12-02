@@ -32,7 +32,8 @@ interface alu_if(input logic clk);
         input  result,
         input  carry_out,
         input  nBo,
-        input  nGo
+        input  nGo,
+		input  clk
     );
 
 endinterface

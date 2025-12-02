@@ -12,8 +12,8 @@ class alu_scoreboard extends uvm_scoreboard;
   endfunction
   
   function void write(alu_seq_item tr);
-	logic [15:0] opr;
-	logic opr_cout;
+	logic [15:0] opr=0;
+	logic opr_cout=0;
 
 	//active low
 	case ({tr.mode, tr.opcode})
@@ -24,9 +24,9 @@ class alu_scoreboard extends uvm_scoreboard;
 		OP_L_AND: begin opr = tr.operand_a & tr.operand_b; opr_cout = 0; end
 		OP_L_OR: begin opr = tr.operand_a | tr.operand_b; opr_cout = 0; end
 		OP_L_XOR: begin opr = tr.operand_a ^ tr.operand_b; opr_cout = 0; end
-		default: begin `uvm_info(get_full_name(), $sformatf("This opcode is not implemented yet"), UVM_LOW); opr = 16'h0000; opr_cout = 0; end
+		default: begin `uvm_info(get_full_name(), $sformatf("This opcode is not implemented yet"), UVM_LOW); opr = 16'hxxxx; opr_cout = 'hx; end
 	endcase
-
+	total++;
 	if (tr.result === opr && tr.carry_out === opr_cout) begin
 		passed++;
 	end else begin
@@ -38,7 +38,7 @@ class alu_scoreboard extends uvm_scoreboard;
    endfunction
    
    function void report_phase(uvm_phase phase);
-	`uvm_info(get_full_name(), $sformatf("Scoreboard: passed=%0d failed=%0d", passed, failed), UVM_LOW);
+	`uvm_info(get_full_name(), $sformatf("Scoreboard: total=%0d passed=%0d failed=%0d", total, passed, failed), UVM_LOW);
    endfunction
    
 endclass

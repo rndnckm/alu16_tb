@@ -1,5 +1,5 @@
-`include "uvm_macros.svh"
-import uvm_pkg::*;
+//`include "uvm_macros.svh"
+//import uvm_pkg::*;
     class alu_seq_item extends uvm_sequence_item;
         rand logic [15:0] operand_a;
         rand logic [15:0] operand_b;

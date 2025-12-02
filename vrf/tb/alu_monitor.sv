@@ -29,7 +29,7 @@ class alu_monitor extends uvm_component;
 			tr.result = vif.result;
 			tr.carry_out  = vif.carry_out;
 			ap.write(tr);
-			//@(posedge vif.clk);
+			@(posedge vif.clk);
             //end
         end
     endtask
