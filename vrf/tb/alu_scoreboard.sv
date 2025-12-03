@@ -18,27 +18,30 @@ class alu_scoreboard extends uvm_scoreboard;
   endfunction
    
   function void write(alu_seq_item tr);
-  	logic [16:0] res = 0;
+  	logic [16:0] res = {tr.carry_in, 16'h0};
 	logic [15:0] opr = 0;
 	logic opr_cout = 0;
 	logic flag_default = 0;
 	//active low
 	
 	case ({tr.mode, tr.opcode})
-		OP_A_ADD: begin res = tr.operand_a + tr.operand_b; end
-		OP_A_SUB: begin res = tr.operand_a - tr.operand_b - (tr.carry_in ? 0 : 1); end 
-		OP_A_MINUS1: begin res = tr.carry_in ? 16'h0000: 16'hFFFF; end
-		OP_A_AMBM1: begin  res = tr.operand_a - tr.operand_b - 16'h1; end
-		OP_L_AND: begin res = tr.operand_a & tr.operand_b; end
-		OP_L_OR: begin res = tr.operand_a | tr.operand_b; end
+		OP_A_ADD: begin res += tr.operand_a + tr.operand_b; end
+		OP_A_SUB: begin res += tr.operand_a - tr.operand_b; end 
+		OP_A_MINUS1: begin res += tr.carry_in ? 16'hFFFF: 16'h0000; end
+		OP_A_AMBM1: begin  res += tr.operand_a - tr.operand_b - 16'h1; end
+		
+		OP_L_AND: begin res = ~(~(tr.operand_a) & (~tr.operand_b)); end
+		OP_L_OR: begin res = ~((~tr.operand_a) | (~tr.operand_b)); end
 		OP_L_XOR: begin res = tr.operand_a ^ tr.operand_b; end
+		
 		default: begin `uvm_info(get_full_name(), $sformatf("This opcode is not implemented yet"), UVM_LOW); res = 'hxxxxx; flag_default = 1; end
 	endcase
-	opr = res [15:0]; opr_cout = res[16] + tr.carry_in;
+	opr = res [15:0]; opr_cout = res[16];
 	total++;
+	//note: rewrite with functions
 	if (!flag_default) begin : fd
 		if (tr.mode == 0) begin :m0
-			if (tr.result === opr && tr.carry_out === opr_cout) begin
+			if (tr.result == opr && tr.carry_out == opr_cout) begin
 			passed++;
 			`uvm_info(get_full_name(),
 				$sformatf("Scoreboard passed: mode=%0b op=%0b a=%h b=%h => result=%h/%b expected=%h/%b",

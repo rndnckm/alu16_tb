@@ -1,7 +1,7 @@
 # alu16_tb
 Testbench for 74181 16-bit ALU verification
 
-Запуск симуляции (QuestaSim):
+Запуск симуляции (QuestaSim 2021.1 64-bit):
 vsim -c -do questa_run.do
 
 Список тестов:

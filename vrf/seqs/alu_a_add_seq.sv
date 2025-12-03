@@ -12,8 +12,7 @@ class alu_add_seq extends uvm_sequence #(alu_seq_item);
         repeat(num_tests) begin
             tr = alu_seq_item::type_id::create("tr");
             assert(tr.randomize() with {
-                opcode == 4'b1001; 
-				mode == 0;
+                {mode, opcode} == OP_A_ADD; 
             });
             `uvm_info("ADD_SEQ", $sformatf("Generated ADD op A=%h B=%h", tr.operand_a, tr.operand_b), UVM_MEDIUM)
             start_item(tr);

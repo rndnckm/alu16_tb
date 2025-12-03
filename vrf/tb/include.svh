@@ -11,9 +11,9 @@ typedef enum logic [4:0] { //  mode, sel, Active Low Inputs
 	
 	OP_L_AND      = {1'b1, 4'b1110},  // AND
 	OP_L_OR       = {1'b1, 4'b1011},  // OR
-	OP_L_XOR    = {1'b1, 4'b0110}  // XOR
+	OP_L_XOR      = {1'b1, 4'b0110}  // XOR
 	
-} alu_opcode_t;
+} alu_opcode_low_t;
 
 /*typedef enum logic [4:0] { //  mode, sel, Active High Inputs
 	

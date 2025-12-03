@@ -19,6 +19,7 @@ class alu_base_test extends uvm_test;
 	alu_and_seq and_seq;
 	alu_or_seq or_seq;
 	alu_xor_seq xor_seq;
+	alu_sub_seq sub_seq;
 	
 	`uvm_info("TEST", "Basic testbench structure is running", UVM_LOW)
     phase.raise_objection(this);
@@ -28,6 +29,9 @@ class alu_base_test extends uvm_test;
 	
 	add_seq = alu_add_seq::type_id::create("add_seq");
 	add_seq.start(env.agent.seqr);
+	
+	sub_seq = alu_sub_seq::type_id::create("sub_seq");
+	sub_seq.start(env.agent.seqr);
 	
 	ambm1_seq = alu_ambm1_seq::type_id::create("ambm1_seq");
 	ambm1_seq.start(env.agent.seqr);
