@@ -2,3 +2,6 @@
 work
 transcript
 *.ini
+*.xml
+*.wlf
+*.log

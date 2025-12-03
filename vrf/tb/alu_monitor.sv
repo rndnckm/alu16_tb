@@ -18,13 +18,14 @@ class alu_monitor extends uvm_component;
     endfunction
 
     task run_phase(uvm_phase phase);
-        alu_seq_item tr;
+        
         forever begin
             //if (!vif.reset) begin
-			tr = alu_seq_item::type_id::create("mon_tr");
+			alu_seq_item tr = alu_seq_item::type_id::create("mon_tr");
 			tr.operand_a = vif.operand_a;
 			tr.operand_b = vif.operand_b;
 			tr.opcode = vif.opcode;
+			tr.mode = vif.mode;
 			tr.carry_in = vif.carry_in;
 			tr.result = vif.result;
 			tr.carry_out  = vif.carry_out;

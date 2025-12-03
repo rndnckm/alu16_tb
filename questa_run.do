@@ -10,7 +10,7 @@ vlog -v src/74182_CLA.v \
 vlog -sv -mfcu vrf/tb/include.svh \
 			   vrf/tb/alu16_if.sv \
 			   vrf/tb/alu_trans.sv \
-			   vrf/seqs/alu_base_seq.sv \
+			   vrf/seqs/*.sv \
 			   vrf/tb/alu_driver.sv \
 			   vrf/tb/alu_monitor.sv \
 			   vrf/tb/alu_agent.sv \

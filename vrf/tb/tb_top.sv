@@ -29,38 +29,8 @@ module alu_tb;
     // UVM test setup
     initial begin
         uvm_config_db#(virtual alu_if.tb_mp)::set(null, "*", "vif", alu_intf);
-        run_test("alu_base_test");//$finish;
+        run_test("alu_base_test");
     end
 	
-  // Test controller
- /* initial begin
-    initialize_test();
-    run_tests();
-    report_results();
-    $finish;
-  end
 
-  task run_tests();
-    test_add_operation();
-    //...
-    test_and_operation();
-    //...
-  endtask
-
-  // Results reporting
-  task report_results();
-    $display("\n=== TEST SUMMARY ===");
-    $display("All basic operations tested");
-    $display("Testbench completed successfully");
-  endtask*/
-
-  // Additional monitoring
-  /*always @(posedge clk) begin
-  //if (!alu_intf.reset) begin
-    // Monitor can be extended here
-    $display("Cycle: opcode=%h, a=%h, b=%h, result=%h, carry_out=%b",
-              alu_intf.opcode, alu_intf.operand_a, 
-              alu_intf.operand_b, alu_intf.result, alu_intf.carry_out);
-  //end
-  end*/
   endmodule

@@ -36,7 +36,6 @@ class alu_agent extends uvm_agent;
   function void connect_phase(uvm_phase phase);
 	super.connect_phase(phase);
     if (is_active == UVM_ACTIVE) begin
-      //drv.vif = vif;
       drv.seq_item_port.connect(seqr.seq_item_export);
     end
   endfunction

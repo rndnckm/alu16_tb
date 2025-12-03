@@ -15,14 +15,11 @@ class alu_base_seq extends uvm_sequence #(alu_seq_item);
   
   // Helper tasks
 	  task initialize_test(alu_seq_item tr);
-		//alu_intf.reset <= 1;
 		tr.operand_a <= 0;
 		tr.operand_b <= 0;
 		tr.mode <= 0;
 		tr.opcode <= 0;
 		tr.carry_in <= 0;
-		//#20 alu_intf.reset <= 0;
-		$display("Test initialization completed");
 	  endtask
 	  
 endclass

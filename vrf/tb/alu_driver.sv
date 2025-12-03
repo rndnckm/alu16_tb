@@ -24,12 +24,13 @@ class alu_driver extends uvm_driver #(alu_seq_item);
   endtask
   
     virtual task drive_item(alu_seq_item tr);
+		
 		vif.operand_a <= tr.operand_a;
 		vif.operand_b <= tr.operand_b;
 		vif.opcode <= tr.opcode;
 		vif.mode <= tr.mode;
 		vif.carry_in <= tr.carry_in;
-		`uvm_info("DRIVER", $sformatf("Driving transaction: a=%h, b=%h, op=%h, mode=%b, carry_in=%b", tr.operand_a, tr.operand_b, tr.opcode, tr.mode, tr.carry_in), UVM_LOW)
+		`uvm_info("DRIVER", $sformatf("Driving transaction: a=%h, b=%h, op=%b, mode=%b, carry_in=%b", tr.operand_a, tr.operand_b, tr.opcode, tr.mode, tr.carry_in), UVM_LOW)
 		@(posedge vif.clk);
 	endtask
   
